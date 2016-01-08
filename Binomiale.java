@@ -18,10 +18,36 @@ public class Binomiale {
     public int br() {
         return (pc * 10) + nc;
     }
+    
+    // Continuous Binomial Representation
+    // Usiamo base dieci per facilitare la lettura
+    public int cbr(int oct) {
+        return (oct*1000) + (10*pc) + nc;
+    } 
 
+    // ALGEBRA
     // Inversione di un intervallo
     public Binomiale inversa() {
         return new Binomiale((12-pc)%12, (7-nc)%7);
+    }
+
+    // Suma due note in rapresentazione binomiale
+    public Binomiale suma(Binomiale altro) {
+        int newpc = mod(altro.pc + this.pc, 12);
+        int newnc = mod(altro.nc + this.nc, 12);
+        return new Binomiale(newpc, newnc);
+    }
+
+    // Prodotto
+    public Binomiale prodotto(Binomalie altro) {
+        int newpc = mod(altro.pc * this.pc, 12);
+        int newnc = mod(altro.nc * this.nc, 12);
+        return new Binomiale(newpc, newnc);
+    }
+
+    // Modulus
+    private int mod(int x, int n) {
+        return ((x%n)+n)%n;
     }
 
     // Continous Name Code
